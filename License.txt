@@ -1,12 +1,5 @@
 Copyright 2018 The ntur developers
 
-This project contains code and text. The code is distributed according to GPL 3, see below. The
-documents are distributed according to Creative Commons Attribution-ShareAlike
-4.0 International Public License, see below.  
-
-License for code
-----------------
-
 The code in this project is free software: you can redistribute it and/or
 modify it under the terms of the GNU General Public License as published by the
 Free Software Foundation, either version 3 of the License, or (at your option)
@@ -16,4 +9,5 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-A copy of the GNU General Public License is available from <http://www.gnu.org/licenses/>.
+A copy of the GNU General Public License is available from
+<http://www.gnu.org/licenses/>.
