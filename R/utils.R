@@ -47,4 +47,48 @@ aggregate <- function(Df, selection, fun=sum){
    select(Df, selection) %>% apply(1, fun)
 }
 
+#' Combine csv files
+#' 
+#' This function stacks csv files. 
+#' The log odds of a probability p is log_odds = log(p/(1-p)), so
+#' ilogit(log_odds) = p. It is already built in to R with the `plogis`
+#' function, but I prefer to code it explicitly and call it `ilogit`.
+#' @param data_directory Where all the csv files live
+#' @param save_data_frame Write the resulting data frame to csv
+#' @author Jens Roeser (jens.roeser@@ntu.ac.uk)
+#' @export combine_data
+#' @return A data frame that is a row_bind of all csv files in the data directory
+#' @examples 
+#' d <- combine_data(data_directory = "raw_data")
+combine_data <- function(data_directory = "", save_data_frame = TRUE){
 
+  suppressPackageStartupMessages(library(tidyverse, warn.conflicts = FALSE)) # Load useful functions
+
+  options(readr.num_columns = 0)  
+
+  dd <- data_directory
+  
+  # find all csv files in raw_data and save them in "ids"
+  ids <- dir(dd, pattern = ".csv")
+  
+  if(length(ids)==0){
+    print("No CSV data frames in current directoy. Sorry ;)")
+  }
+  
+  # Iterate over each data frame and save them in d
+  d <- tibble()
+  for(id in ids){
+    
+    tmp <- paste(dd, id, sep = "/")
+    read_csv(tmp) %>%
+      mutate(subj = id) %>%
+      bind_rows(d) -> d
+  }
+  
+  # Save the collapsed data
+  if(save_data_frame){
+    write_excel_csv(d, "data.csv")
+  }
+  return(d)  
+}
+ 
